@@ -1,6 +1,6 @@
 <?php
 
-$loader = include '../vendor/autoload.php';
+$loader = include __DIR__ . '/../vendor/autoload.php';
 
 include_once "Helper.php";
 
