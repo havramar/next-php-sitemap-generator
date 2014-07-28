@@ -2,7 +2,6 @@
 
 namespace SitemapGenerator\Writer\Text;
 
-use SitemapGenerator\Writer\IndexWriterInterface;
 use SitemapGenerator\Writer\WriterAbstract;
 
 abstract class WriterTextAbstract extends WriterAbstract

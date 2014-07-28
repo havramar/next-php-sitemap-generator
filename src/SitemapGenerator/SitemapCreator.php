@@ -6,7 +6,6 @@ use SitemapGenerator\Creators\AbstractCreator;
 use SitemapGenerator\Creators\IndexCreatorInterface;
 use SitemapGenerator\Creators\SitemapCreatorInterface;
 use SitemapGenerator\Exception\DomainNotSetException;
-use SitemapGenerator\Exception\InvalidUrlsCountToLimitRatioException;
 use SitemapGenerator\Exception\UrlTooLongException;
 use SitemapGenerator\Writer\WriterInterface;
 
