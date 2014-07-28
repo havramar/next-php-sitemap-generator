@@ -83,3 +83,9 @@ Needed more customizable sitemap generator:
 ## More examples
 
 More examples can be found in [tests file](tests/SitemapCreatorTest.php).
+
+## How to run tests
+
+```bash
+vendor/bin/phpunit --configuration tests
+```
