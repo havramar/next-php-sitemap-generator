@@ -22,6 +22,6 @@ class Helper
     {
         self::$root = vfsStream::setup('root');
 
-        return vfsStream::url('root');
+        return vfsStream::url('root') . DIRECTORY_SEPARATOR;
     }
 }

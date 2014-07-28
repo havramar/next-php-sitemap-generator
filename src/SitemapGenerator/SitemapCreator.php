@@ -138,7 +138,7 @@ class SitemapCreator extends AbstractCreator implements SitemapCreatorInterface
      */
     protected function getSitemapFileName($sitemapNumber)
     {
-        return DIRECTORY_SEPARATOR . $this->filenamePrefix . '-'.$sitemapNumber.'.' . $this->extension;
+        return $this->filenamePrefix . '-'.$sitemapNumber.'.' . $this->extension;
     }
 
     public function setSitemapsCount($count)

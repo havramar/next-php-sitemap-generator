@@ -22,6 +22,11 @@ class IndexCreator extends AbstractCreator implements IndexCreatorInterface
     protected $indexCount = 0;
 
     /**
+     * @var string
+     */
+    protected $indexCustomFilenamePrefix = '';
+
+    /**
      * @param int $count
      * @return $this
      */
@@ -36,7 +41,7 @@ class IndexCreator extends AbstractCreator implements IndexCreatorInterface
      *
      * @return void
      */
-    public function createIndex($sitemapsPrefix)
+    public function createIndex($sitemapsLocation)
     {
         $indexWriter = null;
         for ($i = 0; $i < $this->sitemapsCount; $i++)
@@ -51,9 +56,19 @@ class IndexCreator extends AbstractCreator implements IndexCreatorInterface
                 $path = $this->getIndexFileName();
                 $indexWriter = $factory->getIndexWriter($this->format, $path);
             }
-            $indexWriter->add($sitemapsPrefix . $this->getSitemapFileName($i+1));
+            $indexWriter->add($sitemapsLocation . $this->getSitemapFileName($i+1));
         }
         $indexWriter? $indexWriter->close() : null;
+    }
+
+    /**
+     * @param string $filePrefix
+     * @return $this
+     */
+    public function setFileNameForIndex($filePrefix)
+    {
+        $this->indexCustomFilenamePrefix = $filePrefix;
+        return $this;
     }
 
     /**
@@ -63,7 +78,7 @@ class IndexCreator extends AbstractCreator implements IndexCreatorInterface
      */
     private function getSitemapFileName($sitemapNumber)
     {
-        return DIRECTORY_SEPARATOR . $this->filenamePrefix . '-'.$sitemapNumber.'.'.$this->extension;
+        return $this->filenamePrefix . '-'.$sitemapNumber.'.'.$this->extension;
     }
 
     /**
@@ -71,6 +86,7 @@ class IndexCreator extends AbstractCreator implements IndexCreatorInterface
      */
     protected function getIndexFileName()
     {
-        return $this->path . DIRECTORY_SEPARATOR . $this->filenamePrefix . '-index-' . $this->indexCount . '.' . $this->extension;
+        $filenamePrefix = $this->indexCustomFilenamePrefix ? : $this->filenamePrefix;
+        return $this->path . $filenamePrefix . '-index-' . $this->indexCount . '.' . $this->extension;
     }
 }

@@ -20,4 +20,12 @@ interface IndexCreatorInterface extends CreatorInterface
      * @return $this
      */
     public function setSitemapsCount($count);
+
+    /**
+     * Set custom filename prefix for index.
+     *
+     * @param string $filePrefix
+     * @return $this
+     */
+    public function setFileNameForIndex($filePrefix);
 }

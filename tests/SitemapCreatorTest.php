@@ -128,7 +128,6 @@ XML;
 
     public function testCreatingIndexWhenSitemapsAreGenerated()
     {
-
         $creator = new \SitemapGenerator\SitemapCreator();
 
         $tmpPath = \tests\Helper::createTempDir();
@@ -148,7 +147,7 @@ XML;
 
         $indexCreator = $creator->buildIndexCreator();
         $indexCreator->setLimit(1);
-        $indexCreator->createIndex("http://xxx.com");
+        $indexCreator->createIndex("http://xxx.com/");
 
         $this->assertFileExists($tmpPath . DIRECTORY_SEPARATOR . 'customname-index-1.xml');
         $contents = file_get_contents($tmpPath . DIRECTORY_SEPARATOR . 'customname-index-1.xml');
@@ -299,5 +298,37 @@ XML;
         $contents = file_get_contents($tmpPath . DIRECTORY_SEPARATOR . 'customname-2.xml');
 
         $this->assertEquals($secondFileContentExpected, $contents);
+    }
+
+    public function testCustomPrefixForIndexFile()
+    {
+        $creator = new \SitemapGenerator\SitemapCreator();
+
+        $tmpPath = \tests\Helper::createTempDir();
+        $creator->setPath($tmpPath);
+        $creator->setFileName('customname');
+        $creator->setDomain("http://xxx.com");
+
+        $url = new \SitemapGenerator\Url();
+        $url->loc = '/link1';
+        $creator->addUrl($url);
+
+        $indexCreator = $creator->buildIndexCreator();
+        $indexCreator->setFileNameForIndex('differentnamethansitemap');
+        $indexCreator->createIndex("http://xxx.com/");
+
+        $this->assertFileExists($tmpPath . DIRECTORY_SEPARATOR . 'differentnamethansitemap-index-1.xml');
+        $contents = file_get_contents($tmpPath . DIRECTORY_SEPARATOR . 'differentnamethansitemap-index-1.xml');
+        $expectedContent = <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ <sitemap>
+  <loc>http://xxx.com/customname-1.xml</loc>
+ </sitemap>
+</sitemapindex>
+
+XML;
+
+        $this->assertEquals($expectedContent, $contents);
     }
 }

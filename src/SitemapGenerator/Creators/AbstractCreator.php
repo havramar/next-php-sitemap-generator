@@ -45,13 +45,13 @@ abstract class AbstractCreator implements CreatorInterface
     /**
      * Path where to store output files
      *
-     * @param string $tmpPath Path
+     * @param string $path Path
      *
      * @return $this
      */
-    public function setPath($tmpPath)
+    public function setPath($path)
     {
-        $this->path = $tmpPath;
+        $this->path = $path;
         return $this;
     }
 
@@ -77,6 +77,12 @@ abstract class AbstractCreator implements CreatorInterface
         return $this;
     }
 
+    /**
+     * @param $name
+     * @param $extension
+     *
+     * @return $this
+     */
     public function useFormatCustom($name, $extension)
     {
         $this->format = $name;
@@ -84,6 +90,9 @@ abstract class AbstractCreator implements CreatorInterface
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function useFormatText()
     {
         $this->format = 'text';
@@ -91,6 +100,9 @@ abstract class AbstractCreator implements CreatorInterface
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function useFormatXml()
     {
         $this->format = 'xml';
@@ -98,6 +110,9 @@ abstract class AbstractCreator implements CreatorInterface
         return $this;
     }
 
+    /**
+     * @return WriterFactory
+     */
     protected function getWriterFactory()
     {
         if (!$this->writerFactory) {
