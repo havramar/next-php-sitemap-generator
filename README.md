@@ -14,6 +14,12 @@ Needed more customizable sitemap generator:
 * helper constants for some values,
 * some other :)
 
+## Adding to existing project
+
+```
+composer require havramar/next-php-sitemap-generator:dev-master
+```
+
 ## How to run
 
 
